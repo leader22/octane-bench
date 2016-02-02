@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Octane Benchmark on UI / Worker Thread</title>
+</head>
+<body>
+<p>
+  See <a href="">this</a> blog post first.
+</p>
+<ol>
+  <li>
+    Open DevTools console.
+  </li>
+  <li>
+    Click button below.
+  </li>
+</ol>
+
+<button onclick="runOnUi()">Run on UI thread</button>
+<button onclick="runOnWorker()">Run on worker thread</button>
+
+<script src="./octane/base.js"></script>
+<script src="./octane/richards.js"></script>
+<script src="./octane/deltablue.js"></script>
+<script src="./octane/crypto.js"></script>
+<script src="./octane/raytrace.js"></script>
+<script src="./octane/earley-boyer.js"></script>
+<script src="./octane/regexp.js"></script>
+<script src="./octane/splay.js"></script>
+<script src="./octane/navier-stokes.js"></script>
+<script src="./octane/pdfjs.js"></script>
+<script src="./octane/mandreel.js"></script>
+<script src="./octane/gbemu-part1.js"></script>
+<script src="./octane/gbemu-part2.js"></script>
+<script src="./octane/code-load.js"></script>
+<script src="./octane/box2d.js"></script>
+<script src="./octane/zlib.js"></script>
+<script src="./octane/zlib-data.js"></script>
+<script src="./octane/typescript.js"></script>
+<script src="./octane/typescript-input.js"></script>
+<script src="./octane/typescript-compiler.js"></script>
+<script>
+function runOnUi() {
+  BenchmarkSuite.RunSuites({
+    NotifyStart:  function(n)   { console.log('ui:start', n); },
+    NotifyError:  function(e)   { console.error('ui:error', e); },
+    NotifyResult: function(n,s) { console.log('ui:result', n, s); },
+    NotifyScore:  function(s)   { console.info('ui:score', s); },
+  });
+}
+function runOnWorker() {
+  new Worker('./worker.js');
+}
+</script>
+</body>
+</html>
